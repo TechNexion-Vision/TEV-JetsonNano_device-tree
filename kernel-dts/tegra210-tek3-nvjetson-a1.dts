@@ -68,4 +68,20 @@
 		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
 		"",     "",     "SPI1_CS1",     "",     "",     "",     "",     "",     "",     "";
 	};
+
+	host1x {
+		sor1 {
+			hdmi-display {
+				status = "disabled";
+			};
+		};
+
+		dpaux1 {
+			status = "disabled";
+		};
+	};
+
+	i2c@7000c700 { /* i2c4 */
+		status = "disabled";
+	};
 };
