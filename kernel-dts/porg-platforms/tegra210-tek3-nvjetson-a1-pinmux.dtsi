@@ -69,6 +69,14 @@
 				nvidia,enable-input = <TEGRA_PIN_ENABLE>;
 			};
 
+			pe6 {
+				nvidia,pins = "pe6";
+				nvidia,function = "pwm2";
+				nvidia,pull = <TEGRA_PIN_PULL_UP>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+				nvidia,enable-input = <TEGRA_PIN_DISABLE>;
+			};
+
 			pe7 {
 				nvidia,pins = "pe7";
 				nvidia,function = "pwm3";
@@ -274,6 +282,14 @@
 				nvidia,pins = "shutdown";
 				nvidia,function = "shutdown";
 				nvidia,pull = <TEGRA_PIN_PULL_NONE>;
+				nvidia,tristate = <TEGRA_PIN_DISABLE>;
+				nvidia,enable-input = <TEGRA_PIN_DISABLE>;
+			};
+
+			lcd_bl_pwm_pv0 {
+				nvidia,pins = "lcd_bl_pwm_pv0";
+				nvidia,function = "pwm0";
+				nvidia,pull = <TEGRA_PIN_PULL_UP>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
 				nvidia,enable-input = <TEGRA_PIN_DISABLE>;
 			};
@@ -647,14 +663,6 @@
 				nvidia,enable-input = <TEGRA_PIN_ENABLE>;
 			};
 
-			pe6 {
-				nvidia,pins = "pe6";
-				nvidia,function = "rsvd0";
-				nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
-				nvidia,tristate = <TEGRA_PIN_DISABLE>;
-				nvidia,enable-input = <TEGRA_PIN_ENABLE>;
-			};
-
 			cam_af_en_ps5 {
 				nvidia,pins = "cam_af_en_ps5";
 				nvidia,function = "rsvd2";
@@ -738,14 +746,6 @@
 			lcd_te_py2 {
 				nvidia,pins = "lcd_te_py2";
 				nvidia,function = "rsvd1";
-				nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
-				nvidia,tristate = <TEGRA_PIN_DISABLE>;
-				nvidia,enable-input = <TEGRA_PIN_ENABLE>;
-			};
-
-			lcd_bl_pwm_pv0 {
-				nvidia,pins = "lcd_bl_pwm_pv0";
-				nvidia,function = "rsvd3";
 				nvidia,pull = <TEGRA_PIN_PULL_DOWN>;
 				nvidia,tristate = <TEGRA_PIN_DISABLE>;
 				nvidia,enable-input = <TEGRA_PIN_ENABLE>;
