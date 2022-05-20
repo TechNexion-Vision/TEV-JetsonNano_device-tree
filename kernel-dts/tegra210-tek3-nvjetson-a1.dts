@@ -63,7 +63,7 @@
 		"",     "",     "",     "",     "",     "",     "",     "",     "GPIO13",      "",
 		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
 		"UART1_RTS",    "UART1_CTS",    "",     "",     "",     "",     "",     "",     "",     "",
-		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "PCA9555_a21_irq",     "",     "",     "PCA9555_a23_irq",     "",     "",     "",
 		"",     "",     "",     "",     "",     "",     "I2S0_FS",    "I2S0_DIN",    "I2S0_DOUT",   "I2S0_SCLK",
 		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
 		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
@@ -92,6 +92,50 @@
 
 		dpaux1 {
 			status = "disabled";
+		};
+	};
+
+	i2c@7000c000 {
+		pca9555_a23: pca9555@23 {
+			compatible = "nxp,pca9555";
+			reg = <0x23>;
+
+			interrupt-parent = <&gpio>;
+			interrupts = <TEGRA_GPIO(I, 2) IRQ_TYPE_LEVEL_LOW>;
+
+			interrupt-controller;
+			#interrupt-cells = <2>;
+
+			gpio-controller;
+			#gpio-cells = <2>;
+
+			status = "okay";
+			gpio-line-names = "M2_DISABLE_N", "M2_RST_IN", "LTE_WAKE", "W_DISABLE1_CTRL",
+						"BT_M2_EN", "GPIO_LED1", "GPIO_LED2", "GPIO_LED3",
+						"BTBC_GPIO_P20", "BTBC_GPIO_P21", "BTBC_GPIO_P22", "BTBC_GPIO_P23",
+						"BTBC_GPIO_P24", "BTBP_GPIO_P18", "BTBP_GPIO_P19", "BTBP_GPIO_P20";
+		};
+	};
+
+	i2c@7000c500 {
+		pca9555_a21: pca955@21 {
+			compatible = "nxp,pca9555";
+			reg = <0x21>;
+
+			interrupt-parent = <&gpio>;
+			interrupts = <TEGRA_GPIO(H, 7) IRQ_TYPE_LEVEL_LOW>;
+
+			interrupt-controller;
+			#interrupt-cells = <2>;
+
+			gpio-controller;
+			#gpio-cells = <2>;
+
+			status = "okay";
+			gpio-line-names = "CSI0_PWDN", "CSI0_PDB", "CSI0_RST_N", "INFO0_TRIG_IN",
+						"CSI1_PWDN", "CSI1_PDB", "CSI1_RST_N", "INFO1_TRIG_IN",
+						"CSI2_PWDN", "CSI2_PDB", "CSI2_RST_N", "INFO2_TRIG_IN",
+						"CSI4_PWDN", "CSI4_PDB", "CSI4_RST_N", "INFO4_TRIG_IN";
 		};
 	};
 
