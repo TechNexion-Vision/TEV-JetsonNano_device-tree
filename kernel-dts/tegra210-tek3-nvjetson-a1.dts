@@ -30,6 +30,20 @@
 	compatible = "nvidia,p3449-0000-b00+p3448-0000-b00", "nvidia,jetson-nano", "nvidia,tegra210";
 	nvidia,dtsfilename = __FILE__;
 
+	regulators {
+		p3449_vdd_sdmmc3_sw: regulator@11 {
+			compatible = "regulator-fixed-sync";
+			reg = <11>;
+			regulator-name = "vdd-3v3-sd";
+			regulator-min-microvolt = <3300000>;
+			regulator-max-microvolt = <3300000>;
+			gpio = <&gpio TEGRA_GPIO(S, 5) 0>;
+			enable-active-high;
+			regulator-boot-on;
+			vin-supply = <&p3448_vdd_3v3_sys>;
+		};
+	};
+
 	spi@70410000 {
 		status = "okay";
 		spiflash@0 {
@@ -57,14 +71,14 @@
 		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
 		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
 		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
-		"",     "",     "",     "",     "",     "",     "",     "",     "",     "GPIO01",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
 		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
 		"",     "",     "",     "",     "",     "",     "",     "",     "GPIO07",   "",
 		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
 		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
 		"",     "",     "",     "",     "GPIO12",       "",     "",     "",     "",     "",
 		"GPIO11",      "",     "",     "",     "",     "",     "",     "",     "",     "",
-		"",     "",     "",     "",     "",     "",     "GPIO09",     "",     "",     "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
 		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
 		"",     "",     "SPI1_CS1",     "",     "",     "",     "",     "",     "",     "";
 	};
@@ -83,5 +97,18 @@
 
 	i2c@7000c700 { /* i2c4 */
 		status = "disabled";
+	};
+
+	sdhci_sd: sdhci@700b0400 { /* sdmmc3 */
+		/delete-property/ vqmmc-supply;
+		/delete-property/ mmc-ddr-1_8v;
+		/delete-property/ uhs-mask;
+		/delete-property/ non-removable;
+		keep-power-in-suspend;
+		mmc-ocr-mask = <0>;
+		tap-delay = <1>;
+		cd-gpios = <&gpio TEGRA_GPIO(BB, 0) 0>;
+		vmmc-supply = <&p3449_vdd_sdmmc3_sw>;
+		status = "okay";
 	};
 };
