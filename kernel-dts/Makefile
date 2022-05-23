@@ -35,6 +35,9 @@ dtbo-$(CONFIG_ARCH_TEGRA_210_SOC) += tegra210-p3448-all-p3449-0000-camera-imx219
 dtbo-$(CONFIG_ARCH_TEGRA_210_SOC) += tegra210-p3448-all-p3449-0000-camera-imx477-dual.dtbo
 dtbo-$(CONFIG_ARCH_TEGRA_210_SOC) += tegra210-p3448-all-p3449-0000-camera-imx477-imx219.dtbo
 
+dtb-$(CONFIG_ARCH_TEGRA_210_SOC) += tegra210-p3448-0000-p3449-0000-b00-tn.dtb
+dtbo-$(CONFIG_ARCH_TEGRA_210_SOC) += tegra210-p3448-all-p3449-0000-tevi-ap1302-dual.dtbo 
+
 dtb-$(CONFIG_ARCH_TEGRA_210_SOC) += tegra210-tek3-nvjetson-a1.dtb
 
 ifneq ($(dtb-y),)
