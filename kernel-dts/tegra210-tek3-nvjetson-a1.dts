@@ -27,7 +27,7 @@
 
 / {
 	model = "NVIDIA Jetson Nano Developer Kit";
-	compatible = "nvidia,p3449-0000-b00+p3448-0000-b00", "nvidia,jetson-nano", "nvidia,tegra210";
+	compatible ="nvidia,p3449-0000-b00+p3448-0002-b00", "nvidia,jetson-nano", "nvidia,tegra210";
 	nvidia,dtsfilename = __FILE__;
 
 	regulators {
@@ -44,15 +44,16 @@
 		};
 	};
 
-	spi@70410000 {
+	sdhci@700b0600 { /* SDMMC4 for EMMC */
 		status = "okay";
-		spiflash@0 {
-			controller-data {
-				nvidia,x1-len-limit = <16>;
-				nvidia,x4-bus-speed = <104000000>;
-				nvidia,x4-dymmy-cycle = <8>;
-			};
-		};
+	};
+
+	sdhci@700b0000 { /* SDMMC1 for SD card */
+		status = "disabled";
+	};
+
+	spi@70410000 { /* QSPI */
+		status = "disabled";
 	};
 
 	gpio@6000d000 {
