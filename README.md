@@ -20,7 +20,7 @@ $ cd <nvidia_folder>/Linux_for_Tegra/sources/kernel/kernel-4.9/
 $ ./compile_kernel.sh
 ```
 
-(TEK3-NVJETSON: tegra210-tek3-nvjetson-a1.dtb)
+(\<device-tree>.dtb for **TEK3-NVJETSON**: tegra210-tek3-nvjetson-a1.dtb)
 
 * Copy new device-tree to device
 
