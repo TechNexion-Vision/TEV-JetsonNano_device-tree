@@ -20,9 +20,11 @@ $ cd <nvidia_folder>/Linux_for_Tegra/sources/kernel/kernel-4.9/
 $ ./compile_kernel.sh
 ```
 
-* Copy new device-tree to device
 (TEK3-NVJETSON: tegra210-tek3-nvjetson-a1.dtb)
-Copy **Linux_for_Tegra/sources/kernel/kernel-4.9/arch/arm64/boot/dts/<device-tree>.dtb**
+
+* Copy new device-tree to device
+
+Copy **Linux_for_Tegra/sources/kernel/kernel-4.9/arch/arm64/boot/dts/\<device-tree>.dtb**
 
 to device 
 ```
@@ -32,7 +34,7 @@ to device
 
 * Copy new device-tree to workspace, create new system.img and flash.
 
-Copy **Linux_for_Tegra/sources/kernel/kernel-4.9/arch/arm64/boot/dts/<device-tree>.dtb**
+Copy **Linux_for_Tegra/sources/kernel/kernel-4.9/arch/arm64/boot/dts/\<device-tree>.dtb**
 
 to 
 ```
