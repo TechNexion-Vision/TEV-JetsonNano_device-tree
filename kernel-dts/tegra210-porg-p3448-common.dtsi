@@ -705,10 +705,8 @@
 		status = "okay";
 	};
 
-	serial@70006200 { /* UART-C : UART3 : M.2 Key E */
+	serial@70006200 { /* UART-C */
 		compatible = "nvidia,tegra114-hsuart";
-		dma-names = "tx";
-		nvidia,adjust-baud-rates = <921600 921600 100>;
 		status = "okay";
 	};
 
