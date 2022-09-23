@@ -123,7 +123,7 @@
 			tca9548@70 {
 				i2c@0 {
 					rbpcv2_ov5640_a@3c {
-						compatible = "tevi,ov5640";
+						compatible = "nvidia,tevi-ov5640";
 						/* I2C device address */
 						reg = <0x3c>;
 
@@ -274,7 +274,7 @@
 				};
 				i2c@2 {
 					rbpcv2_ov5640_a@3c {
-						compatible = "tevi,ov5640";
+						compatible = "nvidia,tevi-ov5640";
 						/* I2C device address */
 						reg = <0x3c>;
 
@@ -426,7 +426,7 @@
 				};
 				i2c@4 {
 					rbpcv2_ov5640_a@3c {
-						compatible = "tevi,ov5640";
+						compatible = "nvidia,tevi-ov5640";
 						/* I2C device address */
 						reg = <0x3c>;
 
