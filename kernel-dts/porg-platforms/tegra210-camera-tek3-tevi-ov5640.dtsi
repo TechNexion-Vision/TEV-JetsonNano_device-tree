@@ -19,14 +19,14 @@
 / {
 	host1x {
 		vi_base: vi  {
-			num-channels = <3>;
+			num-channels = <4>;
 			ports {
 				#address-cells = <1>;
 				#size-cells = <0>;
 				vi_port0: port@0 {
 					reg = <0>;
 					rbpcv2_ov5640_vi_in0: endpoint {
-						port-index = <0>;
+						port-index = <4>;
 						bus-width = <2>;
 						remote-endpoint = <&rbpcv2_ov5640_csi_out0>;
 					};
@@ -34,7 +34,7 @@
 				vi_port1: port@1 {
 					reg = <1>;
 					rbpcv2_ov5640_vi_in1: endpoint {
-						port-index = <4>;
+						port-index = <5>;
 						bus-width = <2>;
 						remote-endpoint = <&rbpcv2_ov5640_csi_out1>;
 					};
@@ -42,16 +42,24 @@
 				vi_port2: port@2 {
 					reg = <2>;
 					rbpcv2_ov5640_vi_in2: endpoint {
-						port-index = <2>;
+						port-index = <0>;
 						bus-width = <2>;
 						remote-endpoint = <&rbpcv2_ov5640_csi_out2>;
+					};
+				};
+				vi_port3: port@3 {
+					reg = <3>;
+					rbpcv2_ov5640_vi_in3: endpoint {
+						port-index = <2>;
+						bus-width = <2>;
+						remote-endpoint = <&rbpcv2_ov5640_csi_out3>;
 					};
 				};
 			};
 		};
 
 		csi_base: nvcsi {
-			num-channels = <3>;
+			num-channels = <4>;
 			#address-cells = <1>;
 			#size-cells = <0>;
 			csi_chan0: channel@0 {
@@ -62,7 +70,7 @@
 					csi_chan0_port0: port@0 {
 						reg = <0>;
 						rbpcv2_ov5640_csi_in0: endpoint@0 {
-							port-index = <0>;
+							port-index = <4>;
 							bus-width = <2>;
 							remote-endpoint = <&rbpcv2_ov5640_out0>;
 						};
@@ -83,7 +91,7 @@
 					csi_chan1_port0: port@0 {
 						reg = <0>;
 						rbpcv2_ov5640_csi_in1: endpoint@2 {
-							port-index = <4>;
+							port-index = <5>;
 							bus-width = <2>;
 							remote-endpoint = <&rbpcv2_ov5640_out1>;
 						};
@@ -104,7 +112,7 @@
 					csi_chan2_port0: port@0 {
 						reg = <0>;
 						rbpcv2_ov5640_csi_in2: endpoint@4 {
-							port-index = <2>;
+							port-index = <0>;
 							bus-width = <2>;
 							remote-endpoint = <&rbpcv2_ov5640_out2>;
 						};
@@ -113,6 +121,27 @@
 						reg = <1>;
 						rbpcv2_ov5640_csi_out2: endpoint@5 {
 							remote-endpoint = <&rbpcv2_ov5640_vi_in2>;
+						};
+					};
+				};
+			};
+			csi_chan3: channel@3 {
+				reg = <3>;
+				ports {
+					#address-cells = <1>;
+					#size-cells = <0>;
+					csi_chan3_port0: port@0 {
+						reg = <0>;
+						rbpcv2_ov5640_csi_in3: endpoint@6 {
+							port-index = <2>;
+							bus-width = <2>;
+							remote-endpoint = <&rbpcv2_ov5640_out3>;
+						};
+					};
+					csi_chan3_port1: port@1 {
+						reg = <1>;
+						rbpcv2_ov5640_csi_out3: endpoint@7 {
+							remote-endpoint = <&rbpcv2_ov5640_vi_in3>;
 						};
 					};
 				};
@@ -264,9 +293,160 @@
 							port@0 {
 								reg = <0>;
 								rbpcv2_ov5640_out0: endpoint {
-									port-index = <0>;
+									port-index = <4>;
 									bus-width = <2>;
 									remote-endpoint = <&rbpcv2_ov5640_csi_in0>;
+								};
+							};
+						};
+					};
+				};
+				i2c@1 {
+					rbpcv2_ov5640_a@3c {
+						compatible = "nvidia,tevi-ov5640";
+						/* I2C device address */
+						reg = <0x3c>;
+
+						/* V4L2 device node location */
+						devnode = "video1";
+
+						/* Physical dimensions of sensor */
+						physical_w = "3.680";
+						physical_h = "2.760";
+
+						sensor_model = "tevi-ov540";
+
+						use_sensor_mode_id = "true";
+
+						/**
+						* ==== Modes ====
+						* A modeX node is required to support v4l2 driver
+						* implementation with NVIDIA camera software stack
+						*
+						* == Signal properties ==
+						*
+						* phy_mode = "";
+						* PHY mode used by the MIPI lanes for this device
+						*
+						* tegra_sinterface = "";
+						* CSI Serial interface connected to tegra
+						* Incase of virtual HW devices, use virtual
+						* For SW emulated devices, use host
+						*
+						* pix_clk_hz = "";
+						* Sensor pixel clock used for calculations like exposure and framerate
+						*
+						* readout_orientation = "0";
+						* Based on camera module orientation.
+						* Only change readout_orientation if you specifically
+						* Program a different readout order for this mode
+						*
+						* == Image format Properties ==
+						*
+						* active_w = "";
+						* Pixel active region width
+						*
+						* active_h = "";
+						* Pixel active region height
+						*
+						* pixel_t = "";
+						* The sensor readout pixel pattern
+						*
+						* line_length = "";
+						* Pixel line length (width) for sensor mode.
+						*
+						* == Source Control Settings ==
+						*
+						* Gain factor used to convert fixed point integer to float
+						* Gain range [min_gain/gain_factor, max_gain/gain_factor]
+						* Gain step [step_gain/gain_factor is the smallest step that can be configured]
+						* Default gain [Default gain to be initialized for the control.
+						*     use min_gain_val as default for optimal results]
+						* Framerate factor used to convert fixed point integer to float
+						* Framerate range [min_framerate/framerate_factor, max_framerate/framerate_factor]
+						* Framerate step [step_framerate/framerate_factor is the smallest step that can be configured]
+						* Default Framerate [Default framerate to be initialized for the control.
+						*     use max_framerate to get required performance]
+						* Exposure factor used to convert fixed point integer to float
+						* For convenience use 1 sec = 1000000us as conversion factor
+						* Exposure range [min_exp_time/exposure_factor, max_exp_time/exposure_factor]
+						* Exposure step [step_exp_time/exposure_factor is the smallest step that can be configured]
+						* Default Exposure Time [Default exposure to be initialized for the control.
+						*     Set default exposure based on the default_framerate for optimal exposure settings]
+						*
+						* gain_factor = ""; (integer factor used for floating to fixed point conversion)
+						* min_gain_val = ""; (ceil to integer)
+						* max_gain_val = ""; (ceil to integer)
+						* step_gain_val = ""; (ceil to integer)
+						* default_gain = ""; (ceil to integer)
+						* Gain limits for mode
+						*
+						* exposure_factor = ""; (integer factor used for floating to fixed point conversion)
+						* min_exp_time = ""; (ceil to integer)
+						* max_exp_time = ""; (ceil to integer)
+						* step_exp_time = ""; (ceil to integer)
+						* default_exp_time = ""; (ceil to integer)
+						* Exposure Time limits for mode (sec)
+						*
+						* framerate_factor = ""; (integer factor used for floating to fixed point conversion)
+						* min_framerate = ""; (ceil to integer)
+						* max_framerate = ""; (ceil to integer)
+						* step_framerate = ""; (ceil to integer)
+						* default_framerate = ""; (ceil to integer)
+						* Framerate limits for mode (fps)
+						*
+						* embedded_metadata_height = "";
+						* Sensor embedded metadata height in units of rows.
+						* If sensor does not support embedded metadata value should be 0.
+						*/
+						mode0 { /* OV5640_MODE_1920x1080_30FPS */
+							mclk_khz = "27000";
+							num_lanes = "2";
+							tegra_sinterface = "serial_a";
+							phy_mode = "DPHY";
+							discontinuous_clk = "yes";
+							dpcm_enable = "false";
+							cil_settletime = "0";
+							active_w = "1920";
+							active_h = "1080";
+							//pixel_t = "uyvy";
+							pixel_phase = "uyvy";
+							mode_type = "yuv";
+							csi_pixel_bit_depth = "16";
+							readout_orientation = "0";
+							line_length = "2200";
+							inherent_gain = "1";
+							mclk_multiplier = "9.33";
+							pix_clk_hz = "207000000";
+							gain_factor = "100";
+							framerate_factor = "1000000";
+							exposure_factor = "1000000";
+							min_gain_val = "0"; /* 1.00x */
+							max_gain_val = "540"; /* 10.66x */
+							step_gain_val = "6";
+							default_gain = "0"; /* 1.00x */
+							min_hdr_ratio = "1";
+							max_hdr_ratio = "1";
+							min_framerate = "15000000"; /* 2.0 fps */
+							max_framerate = "15000000"; /* 30.0 fps */
+							step_framerate = "1";
+							default_framerate = "30000000"; /* 30.0 fps */
+							min_exp_time = "1070"; /* us */
+							max_exp_time = "33245"; /* us */
+							step_exp_time = "55";
+							default_exp_time = "2495"; /* us */
+							embedded_metadata_height = "0";
+						};
+
+						ports {
+							#address-cells = <1>;
+							#size-cells = <0>;
+							port@0 {
+								reg = <0>;
+								rbpcv2_ov5640_out1: endpoint {
+									port-index = <5>;
+									bus-width = <2>;
+									remote-endpoint = <&rbpcv2_ov5640_csi_in1>;
 								};
 							};
 						};
@@ -414,11 +594,11 @@
 							#size-cells = <0>;
 							port@0 {
 								reg = <0>;
-								rbpcv2_ov5640_out1: endpoint {
+								rbpcv2_ov5640_out2: endpoint {
 									status = "okay";
-									port-index = <4>;
+									port-index = <0>;
 									bus-width = <2>;
-									remote-endpoint = <&rbpcv2_ov5640_csi_in1>;
+									remote-endpoint = <&rbpcv2_ov5640_csi_in2>;
 								};
 							};
 						};
@@ -431,7 +611,7 @@
 						reg = <0x3c>;
 
 						/* V4L2 device node location */
-						devnode = "video4";
+						devnode = "video3";
 
 						/* Physical dimensions of sensor */
 						physical_w = "3.680";
@@ -566,11 +746,11 @@
 							#size-cells = <0>;
 							port@0 {
 								reg = <0>;
-								rbpcv2_ov5640_out2: endpoint {
+								rbpcv2_ov5640_out3: endpoint {
 									status = "okay";
 									port-index = <2>;
 									bus-width = <2>;
-									remote-endpoint = <&rbpcv2_ov5640_csi_in2>;
+									remote-endpoint = <&rbpcv2_ov5640_csi_in3>;
 								};
 							};
 						};
@@ -656,8 +836,8 @@
 				orientation = "1";
 				cam_module1_drivernode0: drivernode0 {
 					pcl_id = "v4l2_sensor";
-					devname = "tevi-ov5640 62-003c";
-					proc-device-tree = "/proc/device-tree/cam_i2cmux/i2c@2/rbpcv2_ov5640_a@3c";
+					devname = "tevi-ov5640 61-003c";
+					proc-device-tree = "/proc/device-tree/cam_i2cmux/i2c@1/rbpcv2_ov5640_a@3c";
 				};
 				cam_module1_drivernode1: drivernode1 {
 					pcl_id = "v4l2_lens";
@@ -670,10 +850,24 @@
 				orientation = "1";
 				cam_module2_drivernode0: drivernode0 {
 					pcl_id = "v4l2_sensor";
+					devname = "tevi-ov5640 62-003c";
+					proc-device-tree = "/proc/device-tree/cam_i2cmux/i2c@2/rbpcv2_ov5640_a@3c";
+				};
+				cam_module2_drivernode1: drivernode1 {
+					pcl_id = "v4l2_lens";
+					proc-device-tree = "/proc/device-tree/lens_ov5640@RBPCV2/";
+				};
+			};
+			cam_module3: module3 {
+				badge = "porg_front_RBP194";
+				position = "front";
+				orientation = "1";
+				cam_module3_drivernode0: drivernode0 {
+					pcl_id = "v4l2_sensor";
 					devname = "tevi-ov5640 64-003c";
 					proc-device-tree = "/proc/device-tree/cam_i2cmux/i2c@4/rbpcv2_ov5640_a@3c";
 				};
-				cam_module2_drivernode1: drivernode1 {
+				cam_module3_drivernode1: drivernode1 {
 					pcl_id = "v4l2_lens";
 					proc-device-tree = "/proc/device-tree/lens_ov5640@RBPCV2/";
 				};
