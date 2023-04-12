@@ -71,6 +71,7 @@
 						power-gpios = <&pca9555_a21 CSI0_PWDN GPIO_ACTIVE_HIGH>;
 						nvmem = <&tevi_ap1302_otp_0>;
 						nvmem-names = "calib-data";
+						data-lanes = <2>;
 						//status = "disabled";
 					};
 				};
@@ -93,6 +94,7 @@
 						power-gpios = <&pca9555_a21 CSI1_PWDN GPIO_ACTIVE_HIGH>;
 						nvmem = <&tevi_ap1302_otp_1>;
 						nvmem-names = "calib-data";
+						data-lanes = <2>;
 						//status = "disabled";
 					};
 				};
@@ -108,6 +110,7 @@
 						power-gpios = <&pca9555_a21 CSI2_PWDN GPIO_ACTIVE_HIGH>;
 						nvmem = <&tevi_ap1302_otp_2>;
 						nvmem-names = "calib-data";
+						data-lanes = <4>;
 						//status = "disabled";
 					};
 
@@ -130,6 +133,7 @@
 						power-gpios = <&pca9555_a21 CSI4_PWDN GPIO_ACTIVE_HIGH>;
 						nvmem = <&tevi_ap1302_otp_4>;
 						nvmem-names = "calib-data";
+						data-lanes = <4>;
 						//status = "disabled";
 					};
 

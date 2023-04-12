@@ -45,7 +45,7 @@
 					reg = <2>;
 					tevi_ap1302_vi_in2: endpoint {
 						port-index = <0>;
-						bus-width = <2>;
+						bus-width = <4>;
 						remote-endpoint = <&tevi_ap1302_csi_out2>;
 					};
 				};
@@ -53,7 +53,7 @@
 					reg = <3>;
 					tevi_ap1302_vi_in3: endpoint {
 						port-index = <2>;
-						bus-width = <2>;
+						bus-width = <4>;
 						remote-endpoint = <&tevi_ap1302_csi_out3>;
 					};
 				};
@@ -116,7 +116,7 @@
 						reg = <0>;
 						tevi_ap1302_csi_in2: endpoint@4 {
 							port-index = <0>;
-							bus-width = <2>;
+							bus-width = <4>;
 							remote-endpoint = <&tevi_ap1302_dual_out2>;
 						};
 					};
@@ -137,7 +137,7 @@
 						reg = <0>;
 						tevi_ap1302_csi_in3: endpoint@6 {
 							port-index = <2>;
-							bus-width = <2>;
+							bus-width = <4>;
 							remote-endpoint = <&tevi_ap1302_dual_out3>;
 						};
 					};
@@ -675,7 +675,7 @@
 						*/
 						mode0 { /* AP1302_MODE_1280x720_60FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -714,7 +714,7 @@
 
 						mode1 { /* AP1302_MODE_1920x1080_30FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -753,7 +753,7 @@
 
 						mode2 { /* AP1302_MODE_1920x1080_30FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -792,7 +792,7 @@
 
 						mode3 { /* AP1302_MODE_1920x1080_30FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -837,7 +837,7 @@
 								reg = <0>;
 								tevi_ap1302_dual_out2: endpoint {
 									port-index = <0>;
-									bus-width = <2>;
+									bus-width = <4>;
 									remote-endpoint = <&tevi_ap1302_csi_in2>;
 								};
 							};
@@ -944,7 +944,7 @@
 						*/
 						mode0 { /* AP1302_MODE_1280x720_60FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -983,7 +983,7 @@
 
 						mode1 { /* AP1302_MODE_1920x1080_30FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -1022,7 +1022,7 @@
 
 						mode2 { /* AP1302_MODE_1920x1080_30FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -1061,7 +1061,7 @@
 
 						mode3 { /* AP1302_MODE_1920x1080_30FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -1106,7 +1106,7 @@
 								reg = <0>;
 								tevi_ap1302_dual_out3: endpoint {
 									port-index = <2>;
-									bus-width = <2>;
+									bus-width = <4>;
 									remote-endpoint = <&tevi_ap1302_csi_in3>;
 								};
 							};
