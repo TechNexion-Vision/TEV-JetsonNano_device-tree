@@ -1,0 +1,187 @@
+/*
+ * arch/arm64/boot/dts/tegra210-p3448-0000-p3449-0000-b00.dts
+ *
+ * Copyright (c) 2018-2021, NVIDIA CORPORATION.  All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
+
+#include "tegra210-porg-p3448-common.dtsi"
+//#include "porg-platforms/tegra210-camera-tek3-nvjetson-tevi-ov5640.dtsi"
+#include "porg-platforms/tegra210-camera-tek3-nvjetson-tevi-ap1302.dtsi"
+//#include "porg-platforms/tegra210-camera-tek3-nvjetson-vizionlink-tevi-ap1302.dtsi"
+#include "porg-platforms/tegra210-tek3-nvjetson-a1-pinmux.dtsi"
+#include "porg-platforms/tegra210-tek3-nvjetson-a1-gpio-default.dtsi"
+#include "porg-platforms/tegra210-porg-p3448-emc-a00.dtsi"
+
+/ {
+	model = "NVIDIA Jetson Nano Developer Kit";
+	compatible ="nvidia,p3449-0000-b00+p3448-0002-b00", "nvidia,jetson-nano", "nvidia,tegra210";
+	nvidia,dtsfilename = __FILE__;
+
+	regulators {
+		p3449_vdd_sdmmc3_sw: regulator@11 {
+			compatible = "regulator-fixed-sync";
+			reg = <11>;
+			regulator-name = "vdd-3v3-sd";
+			regulator-min-microvolt = <3300000>;
+			regulator-max-microvolt = <3300000>;
+			gpio = <&gpio TEGRA_GPIO(S, 5) 0>;
+			enable-active-high;
+			regulator-boot-on;
+			vin-supply = <&p3448_vdd_3v3_sys>;
+		};
+	};
+
+	sdhci@700b0600 { /* SDMMC4 for EMMC */
+		status = "okay";
+	};
+
+	sdhci@700b0000 { /* SDMMC1 for SD card */
+		status = "disabled";
+	};
+
+	spi@70410000 { /* QSPI */
+		status = "disabled";
+	};
+
+	gpio@6000d000 {
+		/* gpio-name for 40-pin header, gpio-name given as COL(10) x ROW(20) */
+		gpio-line-names = "",   "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "SPI1_MOSI",    "SPI1_MISO",    "SPI1_SCK",     "SPI1_CS0",     "SPI0_MOSI",    "SPI0_MISO",    "SPI0_SCK",     "SPI0_CS0",
+		"SPI0_CS1",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "GPIO13",      "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"UART1_RTS",    "UART1_CTS",    "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "PCA9555_a21_irq",     "",     "",     "PCA9555_a23_irq",     "",     "",     "",
+		"",     "",     "",     "",     "",     "",     "I2S0_FS",    "I2S0_DIN",    "I2S0_DOUT",   "I2S0_SCLK",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "GPIO07",   "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "",     "GPIO12",       "",     "",     "",     "",     "",
+		"GPIO11",      "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "",     "",     "",     "",     "",     "",     "",     "",
+		"",     "",     "SPI1_CS1",     "",     "",     "",     "",     "",     "",     "";
+	};
+
+	host1x {
+		sor1 {
+			hdmi-display {
+				status = "disabled";
+			};
+		};
+
+		dpaux1 {
+			status = "disabled";
+		};
+	};
+
+	i2c@7000c000 {
+		pca9555_a23: pca9555@23 {
+			compatible = "nxp,pca9555";
+			reg = <0x23>;
+
+			interrupt-parent = <&gpio>;
+			interrupts = <TEGRA_GPIO(I, 2) IRQ_TYPE_LEVEL_LOW>;
+
+			interrupt-controller;
+			#interrupt-cells = <2>;
+
+			gpio-controller;
+			#gpio-cells = <2>;
+
+			status = "okay";
+			gpio-line-names = "M2_DISABLE_N", "M2_RST_IN", "LTE_WAKE", "W_DISABLE1_CTRL",
+						"BT_M2_EN", "GPIO_LED1", "GPIO_LED2", "GPIO_LED3",
+						"BTBC_GPIO_P20", "BTBC_GPIO_P21", "BTBC_GPIO_P22", "BTBC_GPIO_P23",
+						"BTBC_GPIO_P24", "BTBP_GPIO_P18", "BTBP_GPIO_P19", "BTBP_GPIO_P20";
+		};
+	};
+
+	i2c@7000c500 {
+		pca9555_a21: pca955@21 {
+			compatible = "nxp,pca9555";
+			reg = <0x21>;
+
+			interrupt-parent = <&gpio>;
+			interrupts = <TEGRA_GPIO(H, 7) IRQ_TYPE_LEVEL_LOW>;
+
+			interrupt-controller;
+			#interrupt-cells = <2>;
+
+			gpio-controller;
+			#gpio-cells = <2>;
+
+			status = "okay";
+			gpio-line-names = "CSI0_PWDN", "CSI0_PDB", "CSI0_RST_N", "INFO0_TRIG_IN",
+						"CSI1_PWDN", "CSI1_PDB", "CSI1_RST_N", "INFO1_TRIG_IN",
+						"CSI2_PWDN", "CSI2_PDB", "CSI2_RST_N", "INFO2_TRIG_IN",
+						"CSI4_PWDN", "CSI4_PDB", "CSI4_RST_N", "INFO4_TRIG_IN";
+		};
+	};
+
+	gpio-leds1 {
+		compatible = "gpio-leds";
+		status = "okay";
+		led1 {
+			gpios = <&pca9555_a23 5 GPIO_ACTIVE_HIGH>;
+			default-state = "off";
+		};
+	};
+
+	gpio-leds2 {
+		compatible = "gpio-leds";
+		status = "okay";
+		led2 {
+			gpios = <&pca9555_a23 6 GPIO_ACTIVE_HIGH>;
+			default-state = "off";
+		};
+	};
+
+	gpio-leds3 {
+		compatible = "gpio-leds";
+		status = "okay";
+		led3 {
+			gpios = <&pca9555_a23 7 GPIO_ACTIVE_HIGH>;
+			default-state = "off";
+		};
+	};
+
+	i2c@7000c700 { /* i2c4 */
+		status = "disabled";
+	};
+
+	sdhci_sd: sdhci@700b0400 { /* sdmmc3 */
+		/delete-property/ vqmmc-supply;
+		/delete-property/ mmc-ddr-1_8v;
+		/delete-property/ uhs-mask;
+		/delete-property/ non-removable;
+		keep-power-in-suspend;
+		mmc-ocr-mask = <0>;
+		tap-delay = <1>;
+		cd-gpios = <&gpio TEGRA_GPIO(BB, 0) 0>;
+		vmmc-supply = <&p3449_vdd_sdmmc3_sw>;
+		status = "okay";
+	};
+};
