@@ -64,10 +64,31 @@
 						power-gpios = <&pca9555_a21 CSI0_PWDN GPIO_ACTIVE_HIGH>;
 						nvmem = <&tevi_ap1302_otp_0>;
 						nvmem-names = "calib-data";
+						data-lanes = <2>;
 						//status = "disabled";
 					};
 					vizionlink@30 {
 						pdb-gpios= <&pca9555_a21 CSI0_PDB GPIO_ACTIVE_HIGH>;
+						port = <0>;
+					};
+				};
+
+				i2c@1 {
+					reg = <1>;
+					i2c-mux,deselect-on-exit;
+					#address-cells = <1>;
+					#size-cells = <0>;
+
+					tevi_ap1302_b@3d {
+						reset-gpios = <&pca9555_a21 CSI1_RST_N GPIO_ACTIVE_HIGH>;
+						power-gpios = <&pca9555_a21 CSI1_PWDN GPIO_ACTIVE_HIGH>;
+						nvmem = <&tevi_ap1302_otp_1>;
+						nvmem-names = "calib-data";
+						data-lanes = <2>;
+						//status = "disabled";
+					};
+					vizionlink@30 {
+						pdb-gpios= <&pca9555_a21 CSI1_PDB GPIO_ACTIVE_HIGH>;
 						port = <0>;
 					};
 				};
@@ -83,6 +104,7 @@
 						power-gpios = <&pca9555_a21 CSI2_PWDN GPIO_ACTIVE_HIGH>;
 						nvmem = <&tevi_ap1302_otp_2>;
 						nvmem-names = "calib-data";
+						data-lanes = <2>;
 						//status = "disabled";
 					};
 					vizionlink@30 {
@@ -102,6 +124,7 @@
 						power-gpios = <&pca9555_a21 CSI4_PWDN GPIO_ACTIVE_HIGH>;
 						nvmem = <&tevi_ap1302_otp_4>;
 						nvmem-names = "calib-data";
+						data-lanes = <2>;
 						//status = "disabled";
 					};
 					vizionlink@30 {
