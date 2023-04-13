@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "tegra210-camera-tek3-visionlink-tevi-ap1302.dtsi"
+#include "tegra210-camera-tek3-vizionlink-tevi-ap1302.dtsi"
 
 //Define GPIO number for pca9555_a21
 #define CSI0_PWDN	0

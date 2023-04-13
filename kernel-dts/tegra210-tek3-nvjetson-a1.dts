@@ -21,7 +21,7 @@
 #include "tegra210-porg-p3448-common.dtsi"
 //#include "porg-platforms/tegra210-camera-tek3-nvjetson-tevi-ov5640.dtsi"
 //#include "porg-platforms/tegra210-camera-tek3-nvjetson-tevi-ap1302.dtsi"
-#include "porg-platforms/tegra210-camera-tek3-nvjetson-visionlink-tevi-ap1302.dtsi"
+#include "porg-platforms/tegra210-camera-tek3-nvjetson-vizionlink-tevi-ap1302.dtsi"
 #include "porg-platforms/tegra210-tek3-nvjetson-a1-pinmux.dtsi"
 #include "porg-platforms/tegra210-tek3-nvjetson-a1-gpio-default.dtsi"
 #include "porg-platforms/tegra210-porg-p3448-emc-a00.dtsi"
