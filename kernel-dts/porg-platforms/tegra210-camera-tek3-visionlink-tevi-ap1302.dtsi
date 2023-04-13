@@ -45,7 +45,7 @@
 					reg = <2>;
 					tevi_ap1302_vi_in2: endpoint {
 						port-index = <0>;
-						bus-width = <2>;
+						bus-width = <4>;
 						remote-endpoint = <&tevi_ap1302_csi_out2>;
 					};
 				};
@@ -53,7 +53,7 @@
 					reg = <3>;
 					tevi_ap1302_vi_in3: endpoint {
 						port-index = <2>;
-						bus-width = <2>;
+						bus-width = <4>;
 						remote-endpoint = <&tevi_ap1302_csi_out3>;
 					};
 				};
@@ -116,7 +116,7 @@
 						reg = <0>;
 						tevi_ap1302_csi_in2: endpoint@4 {
 							port-index = <0>;
-							bus-width = <2>;
+							bus-width = <4>;
 							remote-endpoint = <&tevi_ap1302_dual_out2>;
 						};
 					};
@@ -137,7 +137,7 @@
 						reg = <0>;
 						tevi_ap1302_csi_in3: endpoint@6 {
 							port-index = <2>;
-							bus-width = <2>;
+							bus-width = <4>;
 							remote-endpoint = <&tevi_ap1302_dual_out3>;
 						};
 					};
@@ -791,13 +791,13 @@
 						i2c_addr_alias_map_remote = <0x25 0x54 0x55 0x3d>;
 
 						//deserializer output csi lanes 1~4. default 4
-						des_csi_lanes = <2>;
+						des_csi_lanes = <4>;
 
 						//1: Enable 0: Disable continuous clock. default 0
 						des_csi_continuous_clock = <0>;
 
 						//serializer input csi lanes 1~4. default 4
-						ser_csi_lanes = <2>;
+						ser_csi_lanes = <4>;
 
 						//1: Enable 0: Disable continuous clock. default 0
 						ser_csi_continuous_clock = <0>;
@@ -921,7 +921,7 @@
 						*/
 						mode0 { /* AP1302_MODE_1280x720_60FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -960,7 +960,7 @@
 
 						mode1 { /* AP1302_MODE_1920x1080_30FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -999,7 +999,7 @@
 
 						mode2 { /* AP1302_MODE_1920x1080_30FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -1038,7 +1038,7 @@
 
 						mode3 { /* AP1302_MODE_1920x1080_30FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -1083,7 +1083,7 @@
 								reg = <0>;
 								tevi_ap1302_dual_out2: endpoint {
 									port-index = <0>;
-									bus-width = <2>;
+									bus-width = <4>;
 									remote-endpoint = <&tevi_ap1302_csi_in2>;
 								};
 							};
@@ -1103,13 +1103,13 @@
 						i2c_addr_alias_map_remote = <0x25 0x54 0x55 0x3d>;
 
 						//deserializer output csi lanes 1~4. default 4
-						des_csi_lanes = <2>;
+						des_csi_lanes = <4>;
 
 						//1: Enable 0: Disable continuous clock. default 0
 						des_csi_continuous_clock = <0>;
 
 						//serializer input csi lanes 1~4. default 4
-						ser_csi_lanes = <2>;
+						ser_csi_lanes = <4>;
 
 						//1: Enable 0: Disable continuous clock. default 0
 						ser_csi_continuous_clock = <0>;
@@ -1233,7 +1233,7 @@
 						*/
 						mode0 { /* AP1302_MODE_1280x720_60FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -1272,7 +1272,7 @@
 
 						mode1 { /* AP1302_MODE_1920x1080_30FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -1311,7 +1311,7 @@
 
 						mode2 { /* AP1302_MODE_1920x1080_30FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -1350,7 +1350,7 @@
 
 						mode3 { /* AP1302_MODE_1920x1080_30FPS */
 							mclk_khz = "24000";
-							num_lanes = "2";
+							num_lanes = "4";
 							tegra_sinterface = "serial_e";
 							phy_mode = "DPHY";
 							discontinuous_clk = "yes";
@@ -1395,7 +1395,7 @@
 								reg = <0>;
 								tevi_ap1302_dual_out3: endpoint {
 									port-index = <2>;
-									bus-width = <2>;
+									bus-width = <4>;
 									remote-endpoint = <&tevi_ap1302_csi_in3>;
 								};
 							};
