@@ -19,5 +19,6 @@
  */
 
 #include "tegra210-p3448-0000-p3449-0000-b00.dts"
-// #include "porg-platforms/tegra210-porg-camera-dual-tevi-ap1302.dtsi"
+#include "porg-platforms/tegra210-porg-camera-dual-tevi-ov5640.dtsi"
+#include "porg-platforms/tegra210-porg-camera-dual-tevi-ap1302.dtsi"
 #include "porg-platforms/tegra210-porg-camera-dual-tevs.dtsi"

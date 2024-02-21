@@ -1,0 +1,117 @@
+/*
+ * Copyright (c) 2018-2021, NVIDIA CORPORATION.  All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "tegra210-camera-dual-tevi-ov5640.dtsi"
+
+#define CAM1_PWDN		TEGRA_GPIO(S, 0)
+#define CAM1_RST_L		TEGRA_GPIO(S, 7)
+#define CAM2_PWDN		TEGRA_GPIO(S, 1)
+#define CAM2_RST_L		TEGRA_GPIO(T, 0)
+#define CAM_I2C_MUX TEGRA_GPIO(I, 0) // NFC_EN GPIO
+
+/ {
+	host1x {
+		i2c@546c0000 {  //i2c7
+			clock-frequency = <100000>;
+		};
+	};
+
+	cam_i2cmux {
+		compatible = "i2c-mux-gpio";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		mux-gpios = <&gpio CAM_I2C_MUX GPIO_ACTIVE_HIGH>;
+		i2c-parent = <&i2c7>;
+		i2c@0 {
+			reg = <0>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			// status = "disabled";
+			pca9554_a21_0: pca9554_a21@21 {
+				compatible = "nxp,pca9554";
+				reg = <0x21>;
+				gpio-controller;
+				#gpio-cells = <2>;
+				vcc-supply = <&battery_reg>;
+				status = "okay";
+			};
+
+			tevi_otp_0: tevi_otp@54 {
+				compatible = "at24,24c1024";
+				pagesize = <128>;
+				reg = <0x54>;
+				status = "disabled";
+			};
+
+			tevi_ov5640_a@3c {
+				power-gpios = <&gpio CAM1_PWDN GPIO_ACTIVE_HIGH>;
+				reset-gpios = <&gpio CAM1_RST_L GPIO_ACTIVE_HIGH>;
+
+				has-rpi-adapter;
+				exp-gpios = <&pca9554_a21_0 0 GPIO_ACTIVE_HIGH>;
+				info-gpios = <&pca9554_a21_0 2 GPIO_ACTIVE_HIGH>;
+
+				nvmem = <&tevi_otp_0>;
+				nvmem-names = "calib-data";
+				status = "disabled";
+			};
+		};
+		i2c@1 {
+			reg = <1>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			// status = "disabled";
+			pca9554_a21_1: pca9554_e21@21 {
+				compatible = "nxp,pca9554";
+				reg = <0x21>;
+				gpio-controller;
+				#gpio-cells = <2>;
+				vcc-supply = <&battery_reg>;
+				status = "okay";
+			};
+
+			tevi_otp_1: tevi_otp@54 {
+				compatible = "at24,24c1024";
+				pagesize = <128>;
+				reg = <0x54>;
+				status = "disabled";
+			};
+
+			tevi_ov5640_e@3c {
+				power-gpios = <&gpio CAM2_PWDN GPIO_ACTIVE_HIGH>;
+				reset-gpios = <&gpio CAM2_RST_L GPIO_ACTIVE_HIGH>;
+
+				has-rpi-adapter;
+				exp-gpios = <&pca9554_a21_1 0 GPIO_ACTIVE_HIGH>;
+				info-gpios = <&pca9554_a21_1 2 GPIO_ACTIVE_HIGH>;
+
+				nvmem = <&tevi_otp_1>;
+				nvmem-names = "calib-data";
+				status = "disabled";
+			};
+		};
+	};
+
+	gpio@6000d000 {
+		camera-control-output-low {
+			gpio-hog;
+			output-low;
+			gpios = < CAM1_PWDN 0 CAM1_RST_L 0 CAM2_PWDN 0 CAM2_RST_L 0>;
+			label = "cam1-pwdn", "cam1-rst", "cam2-pwdn", "cam2-rst";
+		};
+	};
+};
